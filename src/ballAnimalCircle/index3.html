@@ -18,21 +18,46 @@
     border-radius: 50%;
     background-color: red;
     margin: auto;
-    transform-origin: 30px 300px;
-    animation: rotate 8s linear infinite;
+    /* transform-origin: 30px 300px; */
+    /* animation: rotate 8s linear infinite; */
   }
 
-  @keyframes rotate {
+  /* @keyframes rotate {
     to {
       transform: rotate(1turn);
     }
-  }
+  } */
 
 </style>
 
 <body>
   <div class="container">
-    <div class="ball"></div>
+    <div class="ball" id="ball"></div>
   </div>
+  <script>
+    // debugger
+    let $ball = document.querySelector("#ball");
+    let angle = -90;//旋转角度
+
+    let getPosition = ((centerX, centerY, radius) => {
+      return (angle) => {
+        return {
+          x: +centerX + Math.cos(angle) * radius,
+          y: +centerY + Math.sin(angle) * radius,
+        }
+      }
+    }) (0, 270, 270);
+
+    run();
+    
+    function run() {
+      angle += 1;
+      let point = getPosition((angle * Math.PI) / 180);
+      $ball.style.transform = `translate(${point.x}px,${point.y}px)`;
+      debugger
+      window.requestAnimationFrame(run);
+    }
+
+  </script>
 </body>
 </html>
