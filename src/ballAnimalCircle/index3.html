@@ -54,7 +54,12 @@
       angle += 1;
       let point = getPosition((angle * Math.PI) / 180);
       $ball.style.transform = `translate(${point.x}px,${point.y}px)`;
-      debugger
+      /**
+       * 这里不用setInterval是因为，setInterval需要放到任务队列里面，有可能由于代码
+       * 执行速度等问题，导致小球不能运动的很平滑
+       * 而requestAnimationFrame则是告知浏览器在刷新下一帧时需要执行那些函数。确保我
+       * 们的动画的播放帧率和屏幕的刷新帧率一致。
+       */
       window.requestAnimationFrame(run);
     }
 
