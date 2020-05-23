@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .content {
+      height: 300px;
+      width: 300px;
+      /* background-color: red; */
+    }
+  </style>
+
+</head>
+<body>
+  <div class="content">
+    
+  </div>
+  <script>
+    let sum = 1;
+    let content = document.querySelector('.content');
+    // let sett1 = setInterval(() => {
+    //   setTimeout(() => {
+    //     content.style.backgroundColor = 'red';
+    //     console.log(sum,'red')
+    //     setTimeout(() => {
+    //       content.style.backgroundColor = 'green';
+    //       console.log(sum,'green')
+    //       sum ++;
+    //       sum === 10 && clearInterval(sett1);
+    //     })
+    //   });
+    // })
+
+
+    function run() {
+      requestAnimationFrame(() => {
+        content.style.backgroundColor = 'red';
+        console.log(sum,'red')
+        requestAnimationFrame(() => {
+          content.style.backgroundColor = 'green';
+          console.log(sum,'green')
+          sum ++;
+          sum <= 10 && run();
+        })
+      });
+    }
+
+    run();
+
+
+  </script>
+</body>
+</html>
