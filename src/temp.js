@@ -1,10 +1,8 @@
-function* cycle1_3() {
-  yield 1;
-  yield 2;
-  yield 3;
-  return 4;
-  yield 5;
+var a = 'global scope'
+
+function localScope(...arge) {
+  let b;
+  b = 'local scope'
 }
-for (const iterator of cycle1_3()) {
-  console.log(iterator);
-}
+
+localScope();

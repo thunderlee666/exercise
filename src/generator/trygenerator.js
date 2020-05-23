@@ -38,6 +38,8 @@ for (let index = 0; index < 2; index++) {
  * 一次运行generator并不执行其中的代码
  * 第一个next先执行到yield后面的内容
  * 第二个next如果有入参的话会当做第一个yield的返回值
+ * generator的函数内部报错如果没有被内部捕获的话，后面的代码就不会执行
+ * yield* 执行一个generator函数
  * 
  * 2、forof的循环的时候如果最后有return是不会被循环到的
  * 
