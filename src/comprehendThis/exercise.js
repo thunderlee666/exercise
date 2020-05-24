@@ -10,8 +10,7 @@
  * 这里的 Reference 是一个 Specification Type，也就是 “只存在于规范里的抽象类型”。
  * 它们是为了更好地描述语言的底层行为逻辑才存在的，但并不存在于实际的 js 代码中。
  * 
- * GetValue 返回对象属性真正的值，但是要注意：调用 GetValue，
- * 返回的将是具体的值，而不再是一个 Reference
+ * GetValue 返回对象属性真正的值，而不再是一个 Reference
  * 
  * 1、先把()左边的内容( MemberExpression )ref提出来，看是否是 Reference 类型。
  * 2、如果ref是 Reference 类型，看 IsPropertyReference(ref) 的结果是多少，如果ref
