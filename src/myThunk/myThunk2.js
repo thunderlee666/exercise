@@ -2,6 +2,7 @@ let cbf = function (time) {
   return function (callBack) {
     try {
       setTimeout(() => {
+        console.log(time);
         callBack(null, time);
       }, time);
     } catch (error) {
@@ -14,6 +15,7 @@ let prof = function (time) {
   return new Promise((resolve, reject) => {
     try {
       setTimeout(() => {
+        console.log(time);
         resolve(time);
       }, time);
     } catch (error) {
@@ -28,10 +30,7 @@ let asyncArr = function* () {
 }
 
 function isPromise(target) {
-  if ('function' == typeof target.then) {
-    return true;
-  }
-  return false;
+  return 'function' == typeof target.then;
 }
 
 function toPromise(obj) {
@@ -51,31 +50,55 @@ function toPromise(obj) {
   return obj;
 }
 
-(function() {
-  let asyncArrRun = asyncArr();
-
+let run = function(gen) {
   return new Promise((resolve, reject) => {
-    function run(data) {
-      try {
-        var res = asyncArrRun.next(data);
-      } catch (error) {
-        reject(error)
-      }
-
-      if (res.done) {
-        resolve(res.value);
-        return;
-      }
-
-      let value = toPromise(res.value);
-
-      value.then(data => {
-        console.log(data);
-        run(data);
-      }, error => {
-        reject(error);
-      })
+    let asyncArrRun;
+    if (typeof gen === 'function') {
+      asyncArrRun = gen();  
     }
-    run()
+    if (asyncArrRun && typeof asyncArrRun.next === 'function') {
+      onfufilled();
+    } else {
+      return resolve(asyncArrRun);
+    }
+
+    function onfufilled(res) {
+      let ret;
+      try {
+        ret = asyncArrRun.next(res);
+      } catch (error) {
+        return reject(error);
+      }
+      next(ret);
+    }
+
+    function onRejected(err) {
+      let ret;
+      try {
+        ret = asyncArrRun.throw(err);
+      } catch (error) {
+        return reject(error);
+      }
+      next(ret);
+    }
+
+    function next(data) {
+      if (data.done) {
+        return resolve(data.value);
+      }
+
+      let value = toPromise(data.value);
+
+      if (value && isPromise(value)) {
+        return value.then(onfufilled, onRejected);
+      }
+        // onfufilled(value);
+        return onRejected(new TypeError('You may only yield a function, promise ' +
+          'but the following object was passed: "' + String(ret.value) + '"'));
+    }
   })
-})()
+}
+
+run(asyncArr);
+
+export default run;
