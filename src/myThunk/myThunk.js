@@ -1,3 +1,8 @@
+/**
+ * 0521 目前看来thunk函数的好处是可以自动执行Generator异步函数中每个异步操作
+ * 异步操作需要有回调函数，且需要通过thunk包装一下
+ */
+
 let myThunk = function(fn) {
   return function(...argu) {
     let that = this;
@@ -43,9 +48,3 @@ function next(...argu) {
 }
 
 next();
-
-
-/**
- * 0521 目前看来thunk函数的好处是可以自动执行Generator异步函数中每个异步操作
- * 异步操作需要有回调函数，且需要通过thunk包装一下
- */

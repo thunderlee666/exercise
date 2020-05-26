@@ -1,3 +1,16 @@
+/**
+ * 1、generator的执行顺序
+ * 一次运行generator并不执行其中的代码
+ * 第一个next先执行到yield后面的内容
+ * 第二个next如果有入参的话会当做第一个yield的返回值
+ * generator的函数内部报错如果没有被内部捕获的话，后面的代码就不会执行
+ * yield* 执行一个generator函数
+ * 
+ * 2、forof的循环的时候如果最后有return是不会被循环到的
+ * 
+ * 3、trycatch只能捕获一次错误,捕获过一次错误就不会在进入try语句了
+ */
+
 //path1
 function* tryGenerator(param) {
   console.log(param);
@@ -32,20 +45,6 @@ for (let index = 0; index < 2; index++) {
     console.log(error);
   }
 }
-
-/**
- * 1、generator的执行顺序
- * 一次运行generator并不执行其中的代码
- * 第一个next先执行到yield后面的内容
- * 第二个next如果有入参的话会当做第一个yield的返回值
- * generator的函数内部报错如果没有被内部捕获的话，后面的代码就不会执行
- * yield* 执行一个generator函数
- * 
- * 2、forof的循环的时候如果最后有return是不会被循环到的
- * 
- * 3、trycatch只能捕获一次错误,捕获过一次错误就不会在进入try语句了
- */
-
 
 function * fibonacci() {
   let [prev, curr] = [0, 1];

@@ -1,14 +1,5 @@
 import Point from './base.js';
 
-class ColorPoint extends Point {
-  constructor() {
-    super(1, 2);
-    Point.getZ();
-  }
-}
-
-let a = new ColorPoint();
-
 /**
  * ES6 中函数继承的一些特性
  * 1、可以通过 extends 实现继承。
@@ -25,6 +16,15 @@ let a = new ColorPoint();
  * 9、子类的原型是父类，子类的 prototype 是父类 prototype 的实例。
  * 10、通过 class 可以继承原生的构造函数。
  */
+
+class ColorPoint extends Point {
+  constructor() {
+    super(1, 2);
+    Point.getZ();
+  }
+}
+
+let a = new ColorPoint();
 
 //下面是引用阮一峰的ES6 mixin,可以合并多个类
 function mix(...mixins) {
