@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 48px;">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="format-detection" content="email=no" />
+  <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  <title></title>
+  <style>
+    .iframe-holder {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      top: 40px;
+      -webkit-overflow-scrolling: touch;
+      overflow-y: scroll;
+    }
+
+    .iframe-holder iframe {
+      height: 100%;
+      width: 100%;
+    }
+
+    .agreeBox {
+      height: 100%;
+      width: 100%;
+    }
+
+    html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      height: 100%;
+      width: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <script src="/src/ballAnimalCircle/agree.js"></script>
+  <script>
+    window.agreeComponent.initComponent({
+      color: '#111',
+      title: '产品资料概要2',
+      type: 'pdf',
+      readTimeout: 3,
+      scrollEndCheck: true,
+      url: 'http://10.20.38.55:6060/fund/025010/关于不建议投资购买较高风险等级产品_025010_CONFIRM_20191116_02.pdf',
+      agreeCallback: () => {
+        console.log("同意同意啊");
+      }
+    });
+
+    setTimeout(() => {
+      window.agreeComponent.showAgree()
+    }, 3000);
+
+    setTimeout(() => {
+      window.agreeComponent.initComponent({
+        color: '#fd6749',
+        title: '打开百度啦',
+        type: 'url',
+        readTimeout: 3,
+        scrollEndCheck: false,
+        url: 'https://www.baidu.com/',
+        agreeCallback: () => {
+          console.log("同意百度啊");
+        }
+      });
+      window.agreeComponent.showAgree()
+    }, 13000);
+  </script>
+</body>
+
+</html>

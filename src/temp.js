@@ -1,7 +1,10 @@
-for (let index = 0; index < 2; index++) {
-  try {
-    throw new Error(index);
-  } catch (error) {
-    console.log(error);
+let a = function () {
+  let b = 1;//let 也符合必包的特性
+  return function() {
+    console.log(b);
   }
 }
+
+let c = a();
+debugger
+c();
